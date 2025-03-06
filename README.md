@@ -16,5 +16,5 @@ Module calls within the repo are used to ensure reusability of code and to ensur
 
 Variables drive the code so that there is no need to duplicate effort and that the core resources deployed are unfiform across envs ensuring parity during testing.
 
-# Seperation
-State and vairables are separated between nonprod and prod - this could be segmented further into primary/dr or dev/staging/qa/prod. Doing this would required additional backend configs and vars files.
+# Separation
+State and variables are separated between nonprod and prod - this could be segmented further into primary/dr or dev/staging/qa/prod. Doing this would require additional backend configs and vars files.

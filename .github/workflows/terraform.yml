@@ -1,0 +1,39 @@
+name: Terraform Pipeline
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  localstack:
+    runs-on: ubuntu-latest
+    services:
+      localstack:
+        image: localstack/localstack:latest
+        env:
+          SERVICES: sts, s3, iam, kms
+          DEFAULT_REGION: us-east-1
+          AWS_ACCESS_KEY_ID: test
+          AWS_SECRET_ACCESS_KEY: test
+        ports:
+          - 4566:4566
+          - 4571:4571
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
+        working-directory: ./tf
+      - name: Terraform Init
+        id: init
+        run: terraform init
+        working-directory: ./tf
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -var-file config/nonprod/vars.tfvars 
+        working-directory: ./tf

@@ -38,6 +38,6 @@ module "s3_buckets" {
   tags                    = each.value.tags
   replication_rules       = each.value.replication_rules
   depends_on = [
-    module.dr_s3_buckets
+    module.dr_s3_buckets,
   ]
 }

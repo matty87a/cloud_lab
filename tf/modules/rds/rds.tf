@@ -14,4 +14,5 @@ module "db" {
   replicate_source_db       = var.replicate_source_db
   monitoring_role_name      = "${var.environment}-${var.identifier}-mon-role"
   username                  = var.username
+
 }

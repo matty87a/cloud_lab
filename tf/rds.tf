@@ -17,6 +17,7 @@ module "rds" {
   create_db_subnet_group    = each.value.create_db_subnet_group
   create_monitoring_role    = each.value.create_monitoring_role
   username                  = each.value.username
+  depends_on                = [module.primary_vpc]
 }
 
 
@@ -42,6 +43,7 @@ module "dr_rds" {
   replicate_source_db       = each.value.replica ? module.rds[each.key].db_instance_endpoint : null
   username                  = each.value.username
   depends_on = [
-    module.rds
+    module.rds,
+    module.dr_vpc
   ]
 }
